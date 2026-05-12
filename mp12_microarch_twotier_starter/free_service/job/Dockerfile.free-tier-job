@@ -10,7 +10,7 @@
 FROM python:3.6
 
 # TODO: Set the working directory
-WORKDIR ...
+WORKDIR /app
 
 # Copy model and source files into the image (from /mp12_microarch_twotier_starter/model_config/ directory)
 COPY model_config/requirements.txt /app/
@@ -21,17 +21,22 @@ COPY model_config/utils.py /app/
 COPY model_config/models.py /app/
 
 # TODO: Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # TODO: Create directories for models and data
+RUN mkdir -p /app/models
+RUN mkdir -p /app/data
+
+ENV  DATASET=mnist
+ENV TYPE=ff
 
 # TODO: Preload data and pretrain models
-RUN ...
-RUN ...
-RUN ...
-RUN ...
+RUN python data_preload.py --dataset $DATASET
+RUN python train.py --dataset $DATASET --type $TYPE
+
 
 # TODO: Expose the required port
-EXPOSE ...
+EXPOSE 5000
 
 # TODO: Specify the default command to run the classification script
 CMD ["python", "classify.py"]
