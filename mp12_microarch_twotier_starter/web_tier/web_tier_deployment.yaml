@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: web-tier-container
-        image: virajk063/web-tier:latest
+        image: vkadam157/web-tier:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

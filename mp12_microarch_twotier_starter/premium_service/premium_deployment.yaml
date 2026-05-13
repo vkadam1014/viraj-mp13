@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: flask-api
-        image: virajk063/premium-tier-app:latest
+        image: vkadam157/premium-tier-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000

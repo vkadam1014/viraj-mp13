@@ -22,16 +22,30 @@ spec:
     spec:
       containers:
       - name: flask-api
-        image: virajk063/free-tier-app:latest
+        image: vkadam157/free-tier-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "250m"
+            memory: "128Mi"
       - name: envoy-proxy
         image: envoyproxy/envoy:v1.18-latest
         imagePullPolicy: Always
         ports:
         - containerPort: 9901
         - containerPort: 10000
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "250m"
+            memory: "128Mi"
         command: ["/usr/local/bin/envoy", "-c", "/etc/envoy/envoy.yaml"]
         args: ["--service-node", "free-tier-node", "--service-cluster", "free-tier-cluster"]
         volumeMounts:

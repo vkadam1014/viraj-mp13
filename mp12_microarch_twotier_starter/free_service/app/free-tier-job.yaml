@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: classifier
-        image: virajk063/free-tier-job:latest
+        image: vkadam157/free-tier-job:latest
         imagePullPolicy: Always
         command: ["python", "classify.py"]
       restartPolicy: Never
