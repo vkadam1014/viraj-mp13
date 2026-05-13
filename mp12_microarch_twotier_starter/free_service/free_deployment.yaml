@@ -32,6 +32,8 @@ spec:
         ports:
         - containerPort: 9901
         - containerPort: 10000
+        command: ["/usr/local/bin/envoy", "-c", "/etc/envoy/envoy.yaml"]
+        args: ["--service-node", "free-tier-node", "--service-cluster", "free-tier-cluster"]
         volumeMounts:
         - name: envoy-config
           mountPath: /etc/envoy

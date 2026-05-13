@@ -15,8 +15,9 @@ RUN mkdir -p /app/models
 RUN mkdir -p /app/data
 
 ENV DATASET=kmnist
-ENV TYPE=ff
+ENV TYPE=cnn
 
+COPY premium_service/job/data/KMNIST/raw/ /app/data/KMNIST/raw/
 RUN python data_preload.py --dataset $DATASET
 RUN python train.py --dataset $DATASET --type $TYPE
 
