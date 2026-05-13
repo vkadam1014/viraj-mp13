@@ -1,0 +1,42 @@
+# Starter Dockerfile for the Free Tier job container.
+#
+# This Dockerfile builds a container image for running classification jobs
+# in the 'free-service' namespace. It installs dependencies, preloads data,
+# and pretrains models. Students may modify this file to change the job
+# behavior or add new dependencies.
+#
+
+# Specify the base image
+FROM python:3.6
+
+# TODO: Set the working directory
+WORKDIR /app
+
+# Copy model and source files into the image (from /mp12_microarch_twotier_starter/model_config/ directory)
+COPY model_config/requirements.txt /app/
+COPY model_config/classify.py /app/
+COPY model_config/data_preload.py /app/
+COPY model_config/train.py /app/
+COPY model_config/utils.py /app/
+COPY model_config/models.py /app/
+
+# TODO: Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# TODO: Create directories for models and data
+RUN mkdir -p /app/models
+RUN mkdir -p /app/data
+
+ENV  DATASET=mnist
+ENV TYPE=ff
+
+# TODO: Preload data and pretrain models
+RUN python data_preload.py --dataset $DATASET
+RUN python train.py --dataset $DATASET --type $TYPE
+
+
+# TODO: Expose the required port
+EXPOSE 5000
+
+# TODO: Specify the default command to run the classification script
+CMD ["python", "classify.py"]

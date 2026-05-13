@@ -1,0 +1,21 @@
+# Starter Kubernetes Service for the Free Tier deployment.
+#
+# This YAML exposes the Free Tier deployment via a ClusterIP service on port 8080.
+# Students may use this as a base for exposing their application within the cluster.
+#
+# TODO: Fill in the Kubernetes Service spec here.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: free-tier-service
+  namespace: free-service
+spec:
+  type: ClusterIP
+  selector:
+    app: free-tier-app
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 10000
+

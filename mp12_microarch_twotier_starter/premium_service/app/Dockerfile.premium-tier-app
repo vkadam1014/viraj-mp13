@@ -1,0 +1,15 @@
+FROM python:3.6
+
+WORKDIR /app
+
+# Copy Flask app files
+COPY premium_service/app/flask_app.py /app/
+COPY premium_service/app/premium-tier-job.yaml /app/
+COPY premium_service/app/requirements_flaskapp.txt /app/
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements_flaskapp.txt
+
+EXPOSE 5000
+
+CMD ["python3", "flask_app.py"]

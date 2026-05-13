@@ -1,0 +1,25 @@
+FROM python:3.6
+
+WORKDIR /app
+
+COPY model_config/requirements.txt /app/
+COPY model_config/classify.py /app/
+COPY model_config/data_preload.py /app/
+COPY model_config/train.py /app/
+COPY model_config/utils.py /app/
+COPY model_config/models.py /app/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN mkdir -p /app/models
+RUN mkdir -p /app/data
+
+ENV DATASET=kmnist
+ENV TYPE=ff
+
+RUN python data_preload.py --dataset $DATASET
+RUN python train.py --dataset $DATASET --type $TYPE
+
+EXPOSE 5000
+
+CMD ["python", "classify.py"]

@@ -1,0 +1,43 @@
+# Starter Kubernetes Deployment for the Free Tier service.
+#
+# This YAML defines a deployment that runs both the Flask API and Envoy proxy
+# in the 'free-service' namespace. 
+#
+# TODO: Fill in the Kubernetes Deployment spec here.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: free-tier-deployment
+  namespace: free-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: free-tier-app
+  template:
+    metadata:
+      labels:
+        app: free-tier-app
+    spec:
+      containers:
+      - name: flask-api
+        image: virajk063/free-tier-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+      - name: envoy-proxy
+        image: envoyproxy/envoy:v1.18-latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9901
+        - containerPort: 10000
+        volumeMounts:
+        - name: envoy-config
+          mountPath: /etc/envoy
+      volumes:
+      - name: envoy-config
+        configMap:
+          name: envoy-config
+
+        

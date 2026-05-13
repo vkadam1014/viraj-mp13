@@ -1,0 +1,23 @@
+#
+# This YAML defines a template for launching a batch job in the 'premium-service' namespace.
+# The job runs a container that performs a classification task.
+#
+# TODO: Fill in the Kubernetes Job spec here.
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: premium-tier-job
+  namespace: premium-service
+spec:
+  template:
+    spec:
+      containers:
+      - name: classifier
+        image: virajk063/premium-tier-job:latest
+        imagePullPolicy: Always
+        command: ["python", "classify.py"]
+      restartPolicy: Never
+  backoffLimit: 4
+
+
