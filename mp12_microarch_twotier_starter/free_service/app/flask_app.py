@@ -34,7 +34,6 @@ core_v1 = client.CoreV1Api()
 #   - Submits the job to the Kubernetes cluster
 #   - Returns a success or error response
 @app.route('/free', methods=['POST'])
-@app.route('', methods=['POST'])
 def post_free():
     try:
         data = request.get_json() or {}
