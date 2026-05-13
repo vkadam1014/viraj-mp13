@@ -15,6 +15,7 @@ WORKDIR /app
 # TODO: Copy the necessary application files into the image (from free_service/app/ directory)
 COPY free_service/app/flask_app.py /app/
 COPY free_service/app/requirements_flaskapp.txt /app/
+COPY free_service/app/free-tier-job.yaml /app/
 
 
 # TODO: Install Python dependencies
