@@ -64,7 +64,7 @@ static_resources:
                   address:
                     socket_address:
                       address: free-tier-service.free-service.svc.cluster.local
-                      port_value: 8080
+                      port_value: 5000
 
     - name: premium_service
       connect_timeout: 0.25s
