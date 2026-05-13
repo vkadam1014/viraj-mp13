@@ -17,5 +17,12 @@ spec:
         image: vkadam157/free-tier-job:latest
         imagePullPolicy: Always
         command: ["python", "classify.py"]
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "250m"
+            memory: "128Mi"
       restartPolicy: Never
   backoffLimit: 4
