@@ -9,7 +9,7 @@ FROM envoyproxy/envoy:v1.18.3
 
 
 # TODO: Copy the Envoy configuration file into the image
-COPY web_tier/envoy.yaml /etc/envoy/envoy.yaml
+COPY web_tier/web_tier_envoy.yaml /etc/envoy/envoy.yaml
 
 
 # TODO: Expose the required ports
